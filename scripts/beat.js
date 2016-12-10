@@ -1,20 +1,6 @@
 'use strict';
 
-/* global AFRAME, ekko, _ */
-
-function mode(items) {
-  var lead = null;
-  var max = 0;
-  var counts = {};
-  for (var i = 0; i < items.length; i++) {
-    counts[items[i]] = (counts[items[i]] || 0) + 1;
-    if (counts[items[i]] > max) {
-      max = counts[items[i]];
-      lead = items[i];
-    }
-  }
-  return lead;
-}
+/* global AFRAME, ekko */
 
 AFRAME.registerComponent('beat', {
   dependencies: ['analyser'],
@@ -24,86 +10,51 @@ AFRAME.registerComponent('beat', {
   },
 
   init: function() {
-    this.analyser = this.data.analyserEl.components.audioanalyser;
-    this.threshold = 0;
-    this.lastBeat = Date.now();
 
     var plane = ekko.entity({
       geometry: {
-        primitive: 'circle',
-        radius: 10
+        primitive: 'plane',
+        width: 15,
+        height: 0.2
       },
-      rotation: '-90 0 0',
+      rotation: '-45 0 0',
       material: {
+        shader: 'flat',
         color: 'black'
       }
     });
     this.plane = plane;
     this.el.appendChild(plane);
 
-    this.bpms = [];
-    this.last = Date.now();
-    this.guess = 60;
+    this.analyser = this.data.analyserEl.components.audioanalyser;
+
+    // var analyser = this.data.analyserEl.components.audioanalyser;
+    // analyser.addEventListener('beat', function() {
+
+    //   plane.setAttribute('material', {
+    //     color: 'rgb(' + [
+    //       Math.floor(Math.random() * 100),
+    //       Math.floor(Math.random() * 100),
+    //       Math.floor(Math.random() * 100)
+    //     ].join(',') + ')'
+    //   });
+    // });
+
   },
 
   tick: function() {
 
-    // Predict beat based on guess and last beat
-    if (Date.now() - this.lastBeat > 60000 / this.guess - 10) {
-      this.plane.setAttribute('material', {
-        color: 'rgb(' + [
-          Math.floor(Math.random() * 100),
-          Math.floor(Math.random() * 100),
-          Math.floor(Math.random() * 100)
-        ].join(',') + ')'
-      });
-      this.lastBeat = Date.now();
-    }
+    var intensity = Math.floor(Math.max(
+      50, 255 - (Date.now() - this.analyser.lastBeat) / 4));
 
-    var cur = this.analyser.volume;
+    this.plane.setAttribute('material', {
+      color: 'rgb(' + [
+        intensity,
+        intensity,
+        intensity
+      ].join(',') + ')'
+    });
 
-    if (cur > this.threshold && cur > 0.2) {
-
-      var d = Date.now();
-      var interval = d - this.last;
-      this.last = d;
-      var bpm = 60000 / interval;
-      this.bpms.push(bpm);
-      var groups = [];
-      _.map(this.bpms, function(b) {
-        groups.push(Math.floor((b + 5) / 10) * 10);
-      });
-      var bpmMode = mode(groups);
-
-      var averageModeBpm = 0;
-      var samples = 0;
-      for (var b = 0; b < groups.length; b++) {
-        if (groups[b] === bpmMode) {
-          samples++;
-          averageModeBpm += (this.bpms[b] - averageModeBpm) / samples;
-        }
-      }
-      this.guess = averageModeBpm;
-      console.log('g', this.guess, 'from', groups);
-
-      if (Math.abs(bpm - averageModeBpm) < 10) {
-        // if haven't recently updated update
-        if (Date.now() - this.lastBeat > 60000 / this.guess / 2) {
-          this.plane.setAttribute('material', {
-            color: 'rgb(' + [
-              Math.floor(Math.random() * 100),
-              Math.floor(Math.random() * 100),
-              Math.floor(Math.random() * 100)
-            ].join(',') + ')'
-          });
-        }
-        this.lastBeat = d; // reset downbeat
-      }
-
-      this.threshold = cur * 1.5;
-    } else {
-      this.threshold = this.threshold * 0.99;
-    }
 
   }
 });
