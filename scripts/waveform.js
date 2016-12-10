@@ -2,7 +2,7 @@
 
 /* global AFRAME */
 
-var downScale = 10;
+var downSample = 10;
 
 AFRAME.registerComponent('waveform', {
   dependencies: ['analyser'],
@@ -14,18 +14,16 @@ AFRAME.registerComponent('waveform', {
   init: function() {
     this.analyser = this.data.analyserEl.components.audioanalyser;
 
-    console.log('length', this.analyser.waveform.length);
-
-    for (var i = 0; i < this.analyser.waveform.length / downScale; i += 10) {
+    for (var i = 0; i < this.analyser.waveform.length / downSample; i++) {
       var point = document.createElement('a-entity');
       point.setAttribute('geometry', {
-        primitive: 'sphere',
-        radius: 0.1
-        // height: 0.1,
-        // depth: 0.1
+        primitive: 'box',
+        width: 0.1,
+        height: 0.1,
+        depth: 0.1
       });
       point.setAttribute('position', {
-        x: i / 25,
+        x: i / 10,
         y: 0,
         z: 0
       });
@@ -34,14 +32,24 @@ AFRAME.registerComponent('waveform', {
       });
       this.el.appendChild(point);
     }
+    this.colorCycle = 0;
   },
 
   tick: function() {
+    this.colorCycle = (this.colorCycle + 1) % 510;
+
     var children = this.el.children;
-    for (var i = 0; i < this.analyser.waveform.length / downScale; i += 10) {
-      if (children[i / 10]) {
-        children[i / 10].setAttribute('position', {
-          x: i / 25,
+    for (var i = 0; i < this.analyser.waveform.length / downSample; i++) {
+      if (children[i]) {
+        children[i].setAttribute('material', {
+          color: 'rgb(' + [
+            Math.abs(510 - this.colorCycle),
+            Math.abs(340 - this.colorCycle),
+            Math.abs(170 - this.colorCycle)
+          ].join(',') + ')'
+        });
+        children[i].setAttribute('position', {
+          x: i / 10,
           y: this.analyser.waveform[i] / 64,
           z: 0
         });

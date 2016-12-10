@@ -42,14 +42,19 @@ AFRAME.registerComponent('volume-graph', {
       totalVol += this.analyser.levels[i];
     }
     var point = document.createElement('a-entity');
+    var intensity = totalVol / 3000; // rough est of max
     point.setAttribute('geometry', {
       primitive: 'box',
       width: 0.2,
-      height: totalVol / 300, // rough est of max / 10
+      height: intensity * 10,
       depth: 0.2
     });
     point.setAttribute('material', {
-      color: 'white'
+      color: 'rgb(' + [
+        100 + Math.floor(intensity * 155),
+        50,
+        200 + Math.floor(intensity * 55)
+      ].join(',') + ')'
     });
     point.setAttribute('position', {
       x: 0,

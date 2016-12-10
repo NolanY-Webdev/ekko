@@ -15,13 +15,13 @@
   <body>
 
     <a-scene antialias="true">
-      <a-entity position="0 10 -25" rotation="0 0 0" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity>
+      <a-entity position="-17 10 -25" rotation="0 0 0" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity>
 
       <a-entity id="analyser" audioanalyser=""></a-entity>
 
       <a-entity position="0 0 -10" levels="analyserEl: #analyser"></a-entity>
-     <a-entity position="0 0 -15" volume-graph="analyserEl: #analyser"></a-entity>
-      <a-entity position="0 0 -20" waveform="analyserEl: #analyser"></a-entity>
+      <a-entity position="-4 0 -14" waveform="analyserEl: #analyser"></a-entity>
+     <a-entity position="-8 0 -18" volume-graph="analyserEl: #analyser"></a-entity>
 
       <a-sky color="#222222"></a-sky>
     </a-scene>
