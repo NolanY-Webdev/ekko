@@ -8,6 +8,7 @@
     <script src="scripts/analyser.js"></script>
     <script src="scripts/waveform.js"></script>
     <script src="scripts/levels.js"></script>
+    <script src="scripts/volume-graph.js"></script>
     <!-- <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script> -->
   </head>
 
@@ -19,8 +20,8 @@
       <a-entity id="analyser" audioanalyser=""></a-entity>
 
       <!-- <a-entity position="-1 1 -3" waveform="analyserEl: #analyser"></a-entity> -->
-
       <a-entity position="0 0 -10" levels="analyserEl: #analyser"></a-entity>
+     <a-entity position="0 0 -10" volume-graph="analyserEl: #analyser"></a-entity>
 
       <a-sky color="#222222"></a-sky>
     </a-scene>
