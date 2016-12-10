@@ -1,36 +1,5 @@
 'use strict';
 
-// Media Getter
-navigator.getUserMedia = (
-  navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia
-);
-
-// Audio Nodes
-var audioCtx = window.AudioContext
-      ? new window.AudioContext()
-      : new window.webkitAudioContext(),
-    analyser = audioCtx.createAnalyser(),
-    gainNode = audioCtx.createGain();
-
-function connectSource(source) {
-  source.connect(analyser);
-  // analyser.connect(gainNode);
-  // gainNode.connect(audioCtx.destination);
-  visualize();
-}
-
-// Audio Source
-if (navigator.getUserMedia) {
-  navigator.getUserMedia({audio: true}, function(stream) {
-    connectSource(audioCtx.createMediaStreamSource(stream));
-  }, function(err) {
-    console.log('getUserMedia Error: ' + err);
-  });
-} else {
-  alert('No Audio Source.');
-}
-
 // Visualization targets
 var canvas = document.getElementById('visualizer');
 var canvasCtx = canvas.getContext('2d');
