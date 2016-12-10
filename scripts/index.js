@@ -1,5 +1,17 @@
 'use strict';
 
+/* global _ */
+
+var ekko = {
+  entity: function(props) {
+    var ent = document.createElement('a-entity');
+    _.map(props, function(v, k) {
+      ent.setAttribute(k, v);
+    });
+    return ent;
+  }
+};
+
 // Visualization targets
 var canvas = document.getElementById('visualizer');
 var canvasCtx = canvas.getContext('2d');

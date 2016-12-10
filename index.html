@@ -3,11 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>ekko</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
     <script src="https://aframe.io/releases/0.3.2/aframe.js"></script>
     <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
+    <script src="scripts/index.js"></script>
     <script src="scripts/analyser.js"></script>
     <script src="scripts/waveform.js"></script>
     <script src="scripts/levels.js"></script>
+    <script src="scripts/beat.js"></script>
     <script src="scripts/volume-graph.js"></script>
     <!-- <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script> -->
   </head>
@@ -15,13 +18,15 @@
   <body>
 
     <a-scene antialias="true">
-      <a-entity position="-17 10 -25" rotation="0 0 0" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity>
+      <a-entity position="-17 10 -25" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity>
+      <!-- <a-plane width="100" height="100" position="0 -0.1 -10" rotation="-90 0 0" color="#111111"></a-plane> -->
 
       <a-entity id="analyser" audioanalyser=""></a-entity>
 
       <a-entity position="0 0 -10" levels="analyserEl: #analyser"></a-entity>
       <a-entity position="-4 0 -14" waveform="analyserEl: #analyser"></a-entity>
-     <a-entity position="-8 0 -18" volume-graph="analyserEl: #analyser"></a-entity>
+      <a-entity position="-8 0 -18" volume-graph="analyserEl: #analyser"></a-entity>
+      <a-entity position="0 -1 -5" beat="analyserEl: #analyser"></a-entity>
 
       <a-sky color="#222222"></a-sky>
     </a-scene>

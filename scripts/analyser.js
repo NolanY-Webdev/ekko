@@ -43,11 +43,20 @@ AFRAME.registerComponent('audioanalyser', {
     this.analyser = analyser;
     this.levels = new Uint8Array(analyser.frequencyBinCount);
     this.waveform = new Uint8Array(analyser.fftSize);
+    this.volume = 0;
+
   },
 
   tick: function() {
     if (!source) return;
     analyser.getByteFrequencyData(this.levels);
     analyser.getByteTimeDomainData(this.waveform);
+
+    var sum = 0;
+    for (var i = 0; i < this.levels.length; i += 50) {
+      sum += this.levels[i];
+    }
+    this.volume = sum / 3000; // rough est of %
+
   }
 });
