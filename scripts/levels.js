@@ -19,7 +19,7 @@ AFRAME.registerComponent('levels', {
       point.setAttribute('position', {
         x: i / (10 * downScale),
         y: 0,
-        z: -10
+        z: 0
       });
       point.setAttribute('geometry', {
         primitive: 'box',
@@ -50,7 +50,7 @@ AFRAME.registerComponent('levels', {
         children[i / downScale].setAttribute('position', {
           x: i / (10 * downScale),
           y: this.analyser.levels[i] / 50,
-          z: -10
+          z: 0
         });
       }
     }
