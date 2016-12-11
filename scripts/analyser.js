@@ -32,11 +32,34 @@ function listenToMic() {
   }
 }
 
+function fetchAudio(url) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.responseType = 'arraybuffer';
+
+  source = audioCtx.createBufferSource();
+
+  xhr.onload = function() {
+    audioCtx.decodeAudioData(xhr.response, function(buffer) {
+      source.buffer = buffer;
+    });
+  };
+
+  xhr.send();
+}
+
 AFRAME.registerComponent('audioanalyser', {
+  schema: {
+    src: {type: 'selector'}
+  },
+
   init: function() {
     if (this.data.src) {
-      alert(this.data.src);
-      connectSource(this.data.src);
+      connectSource(audioCtx.createMediaElementSource(this.data.src));
+      // analyser.connect(audioCtx.destination);
+    } else if (this.data.url) {
+      fetchAudio(this.data.url);
+      source.connect(analyser);
     } else {
       listenToMic();
     }

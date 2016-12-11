@@ -5,6 +5,7 @@
     <title>ekko</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
     <script src="https://aframe.io/releases/0.3.2/aframe.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
     <!-- <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script> -->
     <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
     <script src="scripts/index.js"></script>
@@ -15,14 +16,24 @@
     <script src="scripts/volume-graph.js"></script>
     <script src="scripts/volume-fountain.js"></script>
     <script src="scripts/volume-light.js"></script>
+    <script src="scripts/web-plane.js"></script>
   </head>
 
   <body>
+    <div id="web-ui" style="font-family: sans-serif">
+      <h1>ekko</h1>
+      <h5>synesthesia simulator</h3>
+    </div>
 
-    <a-scene antialias="true">
-      <a-entity position="-17 10 -25" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity>
+    <a-scene id="scene" antialias="true">
+      <!-- <a-assets> -->
+      <!-- <\!--   <\\!-- Goldroom - Till Sunrise (TRAILS flip) -\\-> -\-> -->
+      <!--   <audio id="song" autoplay loop crossorigin src="till-sunrise.mp3"></audio> -->
+      <!-- </a-assets> -->
+
+      <!-- <a-entity position="-17 10 -25" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity> -->
+
       <!-- <a-plane width="100" height="100" position="0 -0.1 -10" rotation="-90 0 0" color="#111111"></a-plane> -->
-
 
       <a-entity id="analyser" audioanalyser=""></a-entity>
 
@@ -30,11 +41,12 @@
       <a-entity position="-4 0 -14" waveform="analyserEl: #analyser"></a-entity>
       <a-entity position="-8 0 -18" volume-graph="analyserEl: #analyser"></a-entity>
       <a-entity position="0 0 0" volume-light="analyserEl: #analyser"></a-entity>
+      <a-entity position="0 0 -100" web-plane="webEl: #web-ui"></a-entity>
 
       <!-- <a-entity position="8 0 -6" beat="analyserEl: #analyser"></a-entity> -->
       <!-- <a-entity position="-5 -0.5 -10" volume-fountain="analyserEl: #analyser"></a-entity> -->
 
-      <a-sky color="#111111"></a-sky>
+      <!-- <a-sky color="#111111"></a-sky> -->
     </a-scene>
 
   </body>
