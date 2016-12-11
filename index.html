@@ -5,6 +5,7 @@
     <title>ekko</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
     <script src="https://aframe.io/releases/0.3.2/aframe.js"></script>
+    <!-- <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script> -->
     <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
     <script src="scripts/index.js"></script>
     <script src="scripts/analyser.js"></script>
@@ -12,7 +13,7 @@
     <script src="scripts/levels.js"></script>
     <script src="scripts/beat.js"></script>
     <script src="scripts/volume-graph.js"></script>
-    <!-- <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script> -->
+    <script src="scripts/volume-fountain.js"></script>
   </head>
 
   <body>
@@ -27,6 +28,7 @@
       <a-entity position="-4 0 -14" waveform="analyserEl: #analyser"></a-entity>
       <a-entity position="-8 0 -18" volume-graph="analyserEl: #analyser"></a-entity>
       <a-entity position="8 0 -6" beat="analyserEl: #analyser"></a-entity>
+      <a-entity position="-5 0 -10" volume-fountain="analyserEl: #analyser"></a-entity>
 
       <a-sky color="#222222"></a-sky>
     </a-scene>
