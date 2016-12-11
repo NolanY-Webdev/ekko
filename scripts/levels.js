@@ -2,22 +2,22 @@
 
 /* global AFRAME */
 
-var downScale = 3;
 
 AFRAME.registerComponent('levels', {
   dependencies: ['analyser'],
 
   schema: {
-    analyserEl: {type: 'selector'}
+    analyserEl: {type: 'selector'},
+    downScale: {default: 3}
   },
 
   init: function() {
     this.analyser = this.data.analyserEl.components.audioanalyser;
 
-    for (var i = 0; i < this.analyser.levels.length; i += downScale) {
+    for (var i = 0; i < this.analyser.levels.length; i += this.data.downScale) {
       var point = document.createElement('a-entity');
       point.setAttribute('position', {
-        x: i / (10 * downScale),
+        x: i / (10 * this.data.downScale),
         y: 0,
         z: 0
       });
@@ -45,10 +45,10 @@ AFRAME.registerComponent('levels', {
 
   tick: function() {
     var children = this.el.children;
-    for (var i = 0; i < this.analyser.levels.length; i += downScale) {
-      if (children[i / downScale]) {
-        children[i / downScale].setAttribute('position', {
-          x: i / (10 * downScale),
+    for (var i = 0; i < this.analyser.levels.length; i += this.data.downScale) {
+      if (children[i / this.data.downScale]) {
+        children[i / this.data.downScale].setAttribute('position', {
+          x: i / (10 * this.data.downScale),
           y: this.analyser.levels[i] / 50,
           z: 0
         });
