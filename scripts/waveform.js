@@ -2,19 +2,18 @@
 
 /* global AFRAME */
 
-var downSample = 10;
-
 AFRAME.registerComponent('waveform', {
   dependencies: ['analyser'],
 
   schema: {
-    analyserEl: {type: 'selector'}
+    analyserEl: {type: 'selector'},
+    downScale: {default: 10}
   },
 
   init: function() {
     this.analyser = this.data.analyserEl.components.audioanalyser;
 
-    for (var i = 0; i < this.analyser.waveform.length / downSample; i++) {
+    for (var i = 0; i < this.analyser.waveform.length / this.data.downScale; i++) {
       var point = document.createElement('a-entity');
       point.setAttribute('geometry', {
         primitive: 'box',
@@ -39,7 +38,7 @@ AFRAME.registerComponent('waveform', {
     this.colorCycle = (this.colorCycle + 1) % 510;
 
     var children = this.el.children;
-    for (var i = 0; i < this.analyser.waveform.length / downSample; i++) {
+    for (var i = 0; i < this.analyser.waveform.length / this.data.downScale; i++) {
       if (children[i]) {
         children[i].setAttribute('material', {
           color: 'rgb(' + [

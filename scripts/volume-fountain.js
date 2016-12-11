@@ -43,14 +43,14 @@ AFRAME.registerComponent('volume-fountain', {
     for (var c = 0; c < this.vols.length; c++) {
       var ring = this.el.children[c];
 
-      var intensity = this.vols[c] * (1 - (c / 4) / this.vols.length);
+      var intensity = this.vols[c] * (1 - (c / 1.5) / this.vols.length);
       ring.setAttribute('scale', '1 1 ' + intensity * 30);
       ring.setAttribute('material', {
         shader: 'flat',
         color: 'rgb(' + [
           50 + Math.floor(intensity * 205),
-          50 + Math.floor(intensity * 55),
-          50 + Math.floor(intensity * 55)
+          50 + Math.floor(intensity * 155),
+          50 + Math.floor(intensity * 155)
         ].join(',') + ')'
       });
     }

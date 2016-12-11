@@ -28,18 +28,6 @@ AFRAME.registerComponent('beat', {
 
     this.analyser = this.data.analyserEl.components.audioanalyser;
 
-    // var analyser = this.data.analyserEl.components.audioanalyser;
-    // analyser.addEventListener('beat', function() {
-
-    //   plane.setAttribute('material', {
-    //     color: 'rgb(' + [
-    //       Math.floor(Math.random() * 100),
-    //       Math.floor(Math.random() * 100),
-    //       Math.floor(Math.random() * 100)
-    //     ].join(',') + ')'
-    //   });
-    // });
-
   },
 
   tick: function() {
