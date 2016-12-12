@@ -20,11 +20,6 @@
   </head>
 
   <body>
-    <div id="web-ui" style="font-family: sans-serif">
-      <h1>ekko</h1>
-      <h5>synesthesia simulator</h3>
-    </div>
-
     <a-scene id="scene" antialias="true">
       <!-- <a-assets> -->
       <!-- <\!--   <\\!-- Goldroom - Till Sunrise (TRAILS flip) -\\-> -\-> -->
@@ -41,12 +36,11 @@
       <a-entity position="-4 0 -14" waveform="analyserEl: #analyser"></a-entity>
       <a-entity position="-8 0 -18" volume-graph="analyserEl: #analyser"></a-entity>
       <a-entity position="0 0 0" volume-light="analyserEl: #analyser"></a-entity>
-      <a-entity position="0 0 -100" web-plane="webEl: #web-ui"></a-entity>
 
       <!-- <a-entity position="8 0 -6" beat="analyserEl: #analyser"></a-entity> -->
       <!-- <a-entity position="-5 -0.5 -10" volume-fountain="analyserEl: #analyser"></a-entity> -->
 
-      <!-- <a-sky color="#111111"></a-sky> -->
+      <a-sky color="#111111"></a-sky>
     </a-scene>
 
   </body>
