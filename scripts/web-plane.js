@@ -2,6 +2,9 @@
 
 // Doesn't work in fullscreen
 
+// Dependency <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
+
+
 /* global AFRAME, THREE */
 
 AFRAME.registerComponent('web-plane', {
