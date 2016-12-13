@@ -8,7 +8,13 @@ AFRAME.registerComponent('volume-graph', {
   schema: {
     analyserEl: {type: 'selector'},
     maxChildren: {default: 50},
-    ticksPerPoint: {default: 3}
+    ticksPerPoint: {default: 3},
+    rbase: {default: 100},
+    rscale: {default: 155},
+    gbase: {default: 50},
+    gscale: {default: 0},
+    bbase: {default: 200},
+    bscale: {default: 55}
   },
 
   init: function() {
@@ -46,9 +52,9 @@ AFRAME.registerComponent('volume-graph', {
       },
       material: {
         color: 'rgb(' + [
-          100 + Math.floor(intensity * 155),
-          50,
-          200 + Math.floor(intensity * 55)
+          this.data.rbase + Math.floor(intensity * this.data.rscale),
+          this.data.gbase + Math.floor(intensity * this.data.gscale),
+          this.data.bbase + Math.floor(intensity * this.data.bscale)
         ].join(',') + ')'
       },
       position: {

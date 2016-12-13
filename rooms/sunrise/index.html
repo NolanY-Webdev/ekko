@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ekko</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"></script>
+    <script src="https://aframe.io/releases/0.3.2/aframe.js"></script>
+    <!-- <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script> -->
+    <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
+    <script src="../../scripts/index.js"></script>
+    <script src="../../scripts/analyser.js"></script>
+    <script src="../../scripts/waveform.js"></script>
+    <script src="../../scripts/levels.js"></script>
+    <script src="../../scripts/volume-graph.js"></script>
+    <script src="../../scripts/volume-light.js"></script>
+  </head>
+
+  <body>
+    <a-scene id="scene" antialias="true">
+      <a-assets>
+        <!-- Goldroom - Till Sunrise (TRAILS flip) -->
+        <audio id="song" autoplay crossorigin src="till-sunrise.mp3"></audio>
+        <!-- Image from wallhaven.cc -->
+        <img id="bg" src="day-3.png">
+      </a-assets>
+      <a-entity id="analyser" audioanalyser="src: #song"></a-entity>
+      <a-sky src="#bg"></a-sky>
+
+      <a-entity position="-30 15 -25" scale="10 10 0" bmfont-text="color: red; text: Till Sunrise - Goldroom (TRAILS Flip);"></a-entity>
+
+      <a-entity position="-5 0 -16" levels="analyserEl: #analyser; downScale: 10;"></a-entity>
+
+      <a-entity position="-5 -2 -12" rotation="0 80 180" waveform="analyserEl: #analyser; downScale: 10; modifier: -1"></a-entity>
+      <a-entity position="5 -2 -12" rotation="0 -80 0" waveform="analyserEl: #analyser; downScale: 10"></a-entity>
+
+      <a-entity position="5.5 0 -15" rotation="0 -70 0" volume-graph="analyserEl: #analyser; maxChildren: 80; rbase: 0; rscale: 255; gbase: 0; gscale: 55; bbase: 0; bscale: 0"></a-entity>
+      <a-entity position="-5.5 0 -15" rotation="0 250 0" volume-graph="analyserEl: #analyser; maxChildren: 80; rbase: 0; rscale: 255; gbase: 0; gscale: 55; bbase: 0; bscale: 0"></a-entity>
+      <a-entity position="0 0 0" volume-light="analyserEl: #analyser"></a-entity>
+
+    </a-scene>
+
+  </body>
+  </html>

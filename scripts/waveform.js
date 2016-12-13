@@ -7,6 +7,7 @@ AFRAME.registerComponent('waveform', {
 
   schema: {
     analyserEl: {type: 'selector'},
+    modifier: {default: 1},
     downScale: {default: 10}
   },
 
@@ -49,7 +50,7 @@ AFRAME.registerComponent('waveform', {
         });
         children[i].setAttribute('position', {
           x: i / 10,
-          y: this.analyser.waveform[i] / 64,
+          y: this.data.modifier * this.analyser.waveform[i] / 64,
           z: 0
         });
       }
