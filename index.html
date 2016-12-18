@@ -24,13 +24,21 @@
         <!-- <audio id="song" autoplay crossorigin src="till-sunrise.mp3"></audio> -->
         <!-- Image from wallhaven.cc -->
         <!-- <img id="bg" src="images/earth-2.png"> -->
+        <img id="logo" src="images/ekko.png">
       </a-assets>
 
-      <a-entity position="-17 10 -25" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity>
+      <!-- <a-entity position="-17 10 -25" scale="40 40 0" bmfont-text="color: white; text: ekko;"></a-entity> -->
+
+      <a-entity position="-5 8 -15" >
+        <a-animation attribute="rotation" dur="10000" repeat="indefinite" to="0 360 0" easing="linear"></a-animation>
+        <a-plane src="#logo" opacity="0.99" height="3" width="6"></a-plane>
+        <a-plane rotation="0 180 0" src="#logo" opacity="0.99" height="3" width="6"></a-plane>
+      </a-entity
 
       <!-- <a-plane width="100" height="100" position="0 -0.1 -10" rotation="-90 0 0" color="#444444" opacity="0.5"></a-plane> -->
 
-      <a-entity id="analyser" audioanalyser="src: #song"></a-entity>
+        <a-entity id="analyser" audioanalyser="src: #song"></a-entity>
+
 
       <a-entity position="0 0 -10" levels="analyserEl: #analyser"></a-entity>
       <a-entity position="-4 0 -14" waveform="analyserEl: #analyser"></a-entity>
