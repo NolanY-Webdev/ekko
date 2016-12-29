@@ -12,10 +12,10 @@ var ekko = {
   }
 };
 
-var scene = document.getElementById('scene');
+var body = document.getElementsByTagName('body')[0];
 var audio = document.getElementById('song');
 var playing = false;
-scene.addEventListener('touchstart', function() {
+body.addEventListener('touchstart', function() {
   if (playing) return;
   playing = true;
   audio.play();
