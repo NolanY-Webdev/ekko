@@ -28,11 +28,13 @@ AFRAME.registerComponent('volume-graph', {
     for (var c = 0; c < this.el.children.length; c++) {
       var child = this.el.children[c];
       var position = child.getComputedAttribute('position');
-      child.setAttribute('position', {
-        x: position.x + 0.1,
-        y: position.y,
-        z: position.z
-      });
+      if (position) {
+        child.setAttribute('position', {
+          x: position.x + 0.1,
+          y: position.y,
+          z: position.z
+        });
+      }
     }
 
     // Add new point every ticksPerPoint ticks
