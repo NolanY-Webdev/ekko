@@ -12,6 +12,15 @@ var ekko = {
   }
 };
 
+var scene = document.getElementById('scene');
+var audio = document.getElementById('song');
+var playing = false;
+scene.addEventListener('touchstart', function() {
+  if (playing) return;
+  playing = true;
+  audio.play();
+});
+
 // Visualization targets
 // var canvas = document.getElementById('visualizer');
 // var canvasCtx = canvas.getContext('2d');
