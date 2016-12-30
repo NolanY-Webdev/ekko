@@ -13,11 +13,13 @@ var ekko = {
 };
 
 window.onload = function() {
+  console.log('loaded');
   var play = document.getElementById('scene');
   var audio = document.getElementById('song');
   var playing = false;
   play.addEventListener('touchstart', function() {
-    if (playing) return;
+    console.log('touch', playing);
+    // if (playing) return;
     playing = true;
     audio.play();
   }, false);
