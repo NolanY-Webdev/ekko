@@ -32,7 +32,7 @@ module.exports = rust.o2([
   [
     Entity,
     {
-      position: '-5 8 -15'
+      position: '3 2 -4'
     },
 
     ['a-animation', {
@@ -46,8 +46,8 @@ module.exports = rust.o2([
     ['a-plane', logoProps = {
       src: '#logo',
       opacity: '0.99',
-      height: 3,
-      width: 6
+      height: 1,
+      width: 2
     }],
 
     // Backside of logo
@@ -59,29 +59,32 @@ module.exports = rust.o2([
   [Entity, {
     id: 'analyser',
     audioanalyser: {
-      // src: '#song'
+      src: '#song'
     }
   }],
 
   [Entity, {
-    position: '0 0 -10',
+    position: '-4 -1.5 0',
+    rotation: '0 60 0',
     levels: {analyserEl: '#analyser'}
   }],
 
   [Entity, {
-    position: '-4 0 -14',
+    position: '10 -2 -5',
+    rotation: '0 -140 0',
     waveform: {analyserEl: '#analyser'}
   }],
 
   [Entity, {
-    position: '-8 0 -18',
+    position: '-5 -1 4',
+    rotation: '0 90 0',
     'volume-graph': {analyserEl: '#analyser'}
   }],
 
-  [Entity, {
-    position: '0 0 0',
-    'volume-light': {analyserEl: '#analyser'}
-  }],
+  // [Entity, {
+  //   position: '0 0 0',
+  //   'volume-light': {analyserEl: '#analyser'}
+  // }],
 
 
   ['a-sky', {color: '#222222'}],
@@ -96,25 +99,6 @@ module.exports = rust.o2([
       'wasd-controls': '',
       'look-controls': ''
     },
-
-    // ['a-cursor', {
-    //   color: '#888888',
-    //   'update-raycaster': '',
-    //   raycaster: 'objects: .clickable'
-    //   'event-set__1': 'name: mouseenter; color: green;',
-    //   'event-set__2': 'name: mouseleave; color: #888888;'
-    // }]
-
-    // ['a-animation', {
-    //   begin: 'mouseenter',
-    //   attribute: 'material.color',
-    //   fill: 'forwards',
-    //   easing: 'ease-in',
-    //   from: '#888888',
-    //   to: 'green',
-    //   dur: 300,
-    //   repeat: 0
-    // }]
 
     [Entity, {
       position: '0 0 -1', // always in front of camera

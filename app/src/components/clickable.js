@@ -19,11 +19,13 @@ AFRAME.registerComponent('clicker', {
     var entity = this.el;
 
     this.el.addEventListener('mouseenter', function() {
-      entity.setAttribute('material', 'color', 'green');
+      entity.setAttribute('material', 'color', '#ff007f');
+      entity.setAttribute('material', 'opacity', 1);
     });
 
     this.el.addEventListener('mouseleave', function() {
       entity.setAttribute('material', 'color', '#888888');
+      entity.setAttribute('material', 'opacity', 0.75);
     });
   }
 });
@@ -31,15 +33,16 @@ AFRAME.registerComponent('clicker', {
 AFRAME.registerComponent('clickable', {
   init: function() {
     this.el.classList.add('clickable');
-    var entity = this.el;
 
-    this.el.addEventListener('mouseenter', function() {
-      entity.setAttribute('scale', '1.1 1.1 1');
-    });
+    // not working well atm, sporadic
 
-    this.el.addEventListener('mouseleave', function() {
-      entity.setAttribute('scale', '1 1 1');
-    });
+    // var entity = this.el;
+    // this.el.addEventListener('mouseenter', function() {
+    //   entity.setAttribute('scale', '1.1 1.1 1');
+    // });
+    // this.el.addEventListener('mouseleave', function() {
+    //   entity.setAttribute('scale', '1 1 1');
+    // });
 
   }
 });
