@@ -13,12 +13,14 @@ require('components/waveform');
 require('components/volume-graph');
 require('components/volume-light');
 require('aframe-bmfont-text-component');
+require('components/clickable');
 
 module.exports = rust.o2([
   Scene,
   {antialias: true},
 
-  ['a-assets',
+  [Entity,
+   {primitive: 'a-assets'},
    ['img', {
      id: 'logo',
      src: 'images/ekko.png'
@@ -57,7 +59,7 @@ module.exports = rust.o2([
   [Entity, {
     id: 'analyser',
     audioanalyser: {
-      src: '#song'
+      // src: '#song'
     }
   }],
 
@@ -90,48 +92,50 @@ module.exports = rust.o2([
     {
       // position: '-3.8 1.6 -3.7',
       // rotation: '1.5 -19.6 0'
-      // camera: true,
-      // 'look-controls': true
+      camera: true,
+      'wasd-controls': '',
+      'look-controls': ''
     },
-    [
-      'a-camera',
 
-      ['a-cursor', {
+    // ['a-cursor', {
+    //   color: '#888888',
+    //   'update-raycaster': '',
+    //   raycaster: 'objects: .clickable'
+    //   'event-set__1': 'name: mouseenter; color: green;',
+    //   'event-set__2': 'name: mouseleave; color: #888888;'
+    // }]
+
+    // ['a-animation', {
+    //   begin: 'mouseenter',
+    //   attribute: 'material.color',
+    //   fill: 'forwards',
+    //   easing: 'ease-in',
+    //   from: '#888888',
+    //   to: 'green',
+    //   dur: 300,
+    //   repeat: 0
+    // }]
+
+    [Entity, {
+      position: '0 0 -1', // always in front of camera
+      geometry: {
+        primitive: 'ring',
+        radiusInner: 0.0085,
+        radiusOuter: 0.015
+      },
+      material: {
+        opacity: 0.5,
         color: '#888888',
-        raycaster: {}
-      }]
+        shader: 'flat'
+      },
+      raycaster: {
+        objects: '.clickable'
+      },
+      'update-raycaster': '',
+      clicker: '',
+      cursor: {}
+    }]
 
-      // ['a-animation', {
-      //   begin: 'mouseenter',
-      //   attribute: 'material.color',
-      //   fill: 'forwards',
-      //   easing: 'ease-in',
-      //   from: '#888888',
-      //   to: 'green',
-      //   dur: 300,
-      //   repeat: 0
-      // }]
-
-      // [Entity, {
-      //   position: '0 0 -1', // always in front of camera
-      //   geometry: {
-      //     primitive: 'ring',
-      //     radiusInner: 0.01,
-      //     radiusOuter: 0.015
-      //   },
-      //   material: {
-      //     opacity: 0.5,
-      //     color: 'green',
-      //     shader: 'flat'
-      //   },
-      //   raycaster: {
-      //     far: 1000,
-      //     objects: '.clickable'
-      //   },
-      //   cursor: {}
-      // }]
-
-    ]
   ]
 
 ]);

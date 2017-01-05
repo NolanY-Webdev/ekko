@@ -42,6 +42,9 @@ module.exports = rust.class({
     this.refs.song.pause();
     this.setState({playing: false});
   },
+  toggle: function() {
+    this.state.playing ? this.pause() : this.play();
+  },
 
   render: function() {
     var ctx = this;
@@ -49,7 +52,8 @@ module.exports = rust.class({
     return rust.o2([
       Entity,
       {
-        position: '0 0.85 -1.5'
+        'look-at': '[camera]',
+        position: '0 1.2 -2'
       },
 
       ['audio', {
@@ -63,7 +67,8 @@ module.exports = rust.class({
 
       [Entity,
        {
-         onClick: this.state.playing ? this.pause : this.play
+         clickable: '',
+         onClick: this.toggle
        },
 
        [Entity, {
@@ -95,6 +100,7 @@ module.exports = rust.class({
             Entity,
             {
               position: '0 -' + i*0.8 + ' 0',
+              clickable: '',
               onClick: function() {
                 ctx.setSong(s['stream_url']);
               }
