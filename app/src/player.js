@@ -26,11 +26,8 @@ module.exports = rust.class({
 
     // mobile start
     var play = document.getElementById('scene');
-    var started = false;
     play.addEventListener('touchstart', function() {
-      if (started) return;
-      started = true;
-      ctx.play();
+      if (!ctx.state.playing) ctx.play();
     }, false);
 
     this.refs.song.addEventListener('ended', function() {
