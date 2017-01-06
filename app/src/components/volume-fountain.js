@@ -1,6 +1,8 @@
 'use strict';
 
-/* global AFRAME, ekko */
+/* global AFRAME */
+
+var ekko = require('util/ekko');
 
 AFRAME.registerComponent('volume-fountain', {
   dependencies: ['analyser'],

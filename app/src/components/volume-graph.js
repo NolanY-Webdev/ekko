@@ -1,6 +1,8 @@
 'use strict';
 
-/* global AFRAME, ekko */
+/* global AFRAME */
+
+var ekko = require('util/ekko');
 
 AFRAME.registerComponent('volume-graph', {
   dependencies: ['analyser'],
@@ -27,7 +29,7 @@ AFRAME.registerComponent('volume-graph', {
     // Shift
     for (var c = 0; c < this.el.children.length; c++) {
       var child = this.el.children[c];
-      var position = child.getComputedAttribute('position');
+      var position = child.getAttribute('position');
       if (position) {
         child.setAttribute('position', {
           x: position.x + 0.1,

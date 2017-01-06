@@ -4,12 +4,11 @@ var express = require('express');
 
 var app = express();
 
-app.use(express.static(__dirname));
+var path = __dirname + (process.env.NODE_ENV === 'test'
+                        ? '/test_public'
+                        : '/public');
 
-app.get('/*', function(req, res) {
-  req;
-  res.sendFile(__dirname + '/index.html');
-});
+app.use(express.static(path));
 
 var port = process.env.PORT || 3010;
 

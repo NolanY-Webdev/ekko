@@ -55,7 +55,16 @@ AFRAME.registerComponent('audioanalyser', {
 
   init: function() {
     if (this.data.src) {
-      connectSource(audioCtx.createMediaElementSource(this.data.src));
+      var src = audioCtx.createMediaElementSource(this.data.src);
+      connectSource(src);
+
+      // mobile start
+      document.body.addEventListener('touchstart', function() {
+        setTimeout(function() {
+          connectSource(src);
+        }, 100);
+      }, false);
+
       analyser.connect(audioCtx.destination);
     } else if (this.data.url) {
       fetchAudio(this.data.url);

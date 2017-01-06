@@ -2,22 +2,45 @@
   "name": "ekko",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/makakoa/ekko.git"
+    "postinstall": "webpack",
+    "start": "node app/server.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/makakoa/ekko/issues"
-  },
-  "homepage": "https://github.com/makakoa/ekko#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "aframe": "^0.4.0",
+    "aframe-bmfont-text-component": "^0.1.4",
+    "aframe-event-set-component": "^3.0.1",
+    "aframe-react": "^3.4.1",
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.11.1",
+    "bluebird": "^3.4.0",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "fs": "0.0.2",
+    "json-loader": "^0.5.4",
+    "lodash": "^4.13.1",
+    "mcfly": "^1.0.0",
+    "moment": "^2.14.1",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0",
+    "react-router": "^2.4.1",
+    "soundcloud": "^3.1.2",
+    "superagent": "^2.0.0",
+    "webpack": "^1.12.14"
+  },
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "jscs": "^2.11.0",
+    "jscs-loader": "^0.2.0",
+    "jshint": "^2.9.1",
+    "jshint-loader": "^0.8.3",
+    "nodemon": "^1.9.2",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "style-loader": "^0.13.1",
+    "webpack-dev-server": "^1.14.1"
   }
 }
