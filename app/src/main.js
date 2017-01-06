@@ -59,7 +59,7 @@ module.exports = rust.o2([
   [Entity, {
     id: 'analyser',
     audioanalyser: {
-      src: '#song'
+      // src: '#song'
     }
   }],
 

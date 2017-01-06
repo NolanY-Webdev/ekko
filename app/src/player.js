@@ -2,7 +2,8 @@
 
 var rust = require('rust'),
     _ = require('lodash'),
-    Entity = require('aframe-react').Entity;
+    Entity = require('aframe-react').Entity,
+    skipProps;
 
 var SC = require('soundcloud');
 SC.initialize({'client_id': 'QEEXQ0EStbSsHD3cv5giTD6j2tusWuHr'});
@@ -46,6 +47,9 @@ module.exports = rust.class({
       scroll: 0
     });
   },
+  clickItem: function(index) { // hack to fix click rebinding problem
+    this.setCurrent(index + this.state.scroll);
+  },
   setCurrent: function(index) {
     this.setState({current: index});
     setTimeout(this.play, 100);
@@ -58,6 +62,15 @@ module.exports = rust.class({
   },
   previousPage: function() {
     this.setState({scroll: Math.max(this.state.scroll - 5, 0)});
+  },
+
+  nextSong: function() {
+    this.setState({
+      current: Math.min(this.state.list.length, this.state.current + 1)
+    });
+  },
+  lastSong: function() {
+    this.setState({current: Math.max(0, this.state.current - 1)});
   },
 
   play: function() {
@@ -92,22 +105,49 @@ module.exports = rust.class({
         src: song['stream_url'] + '?client_id=QEEXQ0EStbSsHD3cv5giTD6j2tusWuHr'
       }],
 
-      [Entity, {
-        position: '0.2 0.2 0',
-        geometry: {
-          primitive: 'plane',
-          width: 0.6,
-          height: 0.6
-        },
-        material: {
-          src: this.state.playing ? 'pause.png' : 'play.png',
-          opacity: 0.9,
-          shader: 'flat',
-          color: '#dddddd'
-        },
-        clickable: '',
-        onClick: this.toggle
-      }],
+      [Entity,
+       {position: '0.2 0.2 0'},
+
+       [Entity, {
+         position: '-0.5 0 0',
+         rotation: '0 0 180',
+         onClick: this.lastSong
+       }, skipProps = {
+         geometry: {
+           primitive: 'plane',
+           width: 0.3,
+           height: 0.3
+         },
+         material: {
+           src: 'forward.png',
+           opacity: 0.9,
+           shader: 'flat',
+           color: '#dddddd'
+         },
+         clickable: ''
+       }],
+
+       [Entity, {
+         geometry: {
+           primitive: 'plane',
+           width: 0.6,
+           height: 0.6
+         },
+         material: {
+           src: this.state.playing ? 'pause.png' : 'play.png',
+           opacity: 0.9,
+           shader: 'flat',
+           color: '#dddddd'
+         },
+         clickable: '',
+         onClick: this.toggle
+       }],
+
+       [Entity, {
+         position: '0.5 0 0',
+         onClick: this.nextSong
+       }, skipProps]
+      ],
 
       [Entity, {
         position: '-1.2 -1 0',
@@ -149,15 +189,16 @@ module.exports = rust.class({
         {position: '0 -0.65 0'},
 
         _.map(this.state.list.slice(this.state.scroll, this.state.scroll + 5),
-              function(s, i) {
-                var ind = ctx.state.scroll + i;
+              function(s, ind) {
+
+                var i = ctx.state.scroll + ind;
                 return [
                   Entity,
                   {
-                    position: '0 -' + i*0.8 + ' 0',
+                    position: '0 -' + ind*0.8 + ' 0',
                     clickable: '',
                     onClick: function() {
-                      ctx.setCurrent(ind);
+                      ctx.clickItem(i);
                     }
                   },
 
@@ -177,7 +218,7 @@ module.exports = rust.class({
                   [Entity, {
                     position: '0 0 -0.01',
                     'bmfont-text': {
-                      color: ind === ctx.state.current ? '#ff007f' : '#fff',
+                      color: i === ctx.state.current ? '#ff007f' : '#fff',
                       text: s.title
                     }
                   }],
@@ -185,7 +226,7 @@ module.exports = rust.class({
                   [Entity, {
                     position: '0 -0.2 0.01',
                     'bmfont-text': {
-                      color: ind === ctx.state.current ? '#ff007f' : '#fff',
+                      color: i === ctx.state.current ? '#ff007f' : '#fff',
                       text: s.user.username
                     }
                   }],
