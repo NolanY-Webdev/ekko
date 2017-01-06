@@ -67,7 +67,11 @@ module.exports = {
       'lib'
     ]
   },
-  plugins: [
+  plugins: debug ? [
     new webpack.HotModuleReplacementPlugin()
+  ] : [
+    new webpack.optimize.UglifyJsPlugin({mangle: false}),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin()
   ]
 };
