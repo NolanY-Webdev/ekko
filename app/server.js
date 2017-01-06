@@ -10,11 +10,6 @@ var path = __dirname + (process.env.NODE_ENV === 'test'
 
 app.use(express.static(path));
 
-app.get('/*', function(req, res) {
-  req;
-  res.sendFile(path + '/index.html');
-});
-
 var port = process.env.PORT || 3010;
 
 app.listen(port, function() {
