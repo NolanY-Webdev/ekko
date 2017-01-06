@@ -25,8 +25,7 @@ module.exports = rust.class({
     var ctx = this;
 
     // mobile start
-    var play = document.getElementById('scene');
-    play.addEventListener('touchstart', function() {
+    document.body.addEventListener('touchstart', function() {
       if (!ctx.state.playing) ctx.play();
     }, false);
 
