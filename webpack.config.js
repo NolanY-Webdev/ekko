@@ -31,7 +31,7 @@ module.exports = {
     filename: 'scripts.min.js'
   },
   module: {
-    preLoaders: [{
+    preLoaders: debug ? [{
       test:    /\.js$/,
       exclude: /node_modules/,
       loader: 'jshint-loader'
@@ -39,7 +39,7 @@ module.exports = {
       test:    /\.js$/,
       exclude: /node_modules/,
       loader: 'jscs-loader'
-    }],
+    }] : [],
     loaders: _.flatten([
       {
         test: /\.jsx?$/,
