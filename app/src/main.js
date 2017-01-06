@@ -43,15 +43,20 @@ module.exports = rust.o2([
       easing: 'linear'
     }],
 
-    ['a-plane', logoProps = {
-      src: '#logo',
-      opacity: '0.99',
-      height: 1,
-      width: 2
+    [Entity, logoProps = {
+      geometry: {
+        primitive: 'plane',
+        height: 1,
+        width: 2
+      },
+      material: {
+        src: '#logo',
+        opacity: '0.99'
+      }
     }],
 
     // Backside of logo
-    ['a-plane', {
+    [Entity, {
       rotation: '0 180 0'
     }, logoProps]
   ],
