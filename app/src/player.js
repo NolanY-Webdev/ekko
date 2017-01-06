@@ -22,8 +22,17 @@ module.exports = rust.class({
     this.getFaves();
     this.getPlaylists();
     // setTimeout(this.play, 100);
-
     var ctx = this;
+
+    // mobile start
+    var play = document.getElementById('scene');
+    var started = false;
+    play.addEventListener('touchstart', function() {
+      if (started) return;
+      started = true;
+      ctx.play();
+    }, false);
+
     this.refs.song.addEventListener('ended', function() {
       if (ctx.state.list[ctx.state.current + 1]) {
         ctx.setState({current: ctx.state.current + 1});
