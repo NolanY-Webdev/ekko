@@ -13,6 +13,7 @@
     "aframe": "^0.4.0",
     "aframe-bmfont-text-component": "^0.1.4",
     "aframe-event-set-component": "^3.0.1",
+    "aframe-particle-system-component": "^1.0.6",
     "aframe-react": "^3.4.1",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",

@@ -12,8 +12,11 @@ require('components/levels');
 require('components/waveform');
 require('components/volume-graph');
 require('components/volume-light');
+require('aframe-particle-system-component');
 require('aframe-bmfont-text-component');
 require('components/clickable');
+
+
 
 module.exports = rust.o2([
   Scene,
@@ -63,33 +66,48 @@ module.exports = rust.o2([
 
   [Entity, {
     id: 'analyser',
-    audioanalyser: {
-      src: '#song'
-    }
+    audioanalyser: {src: '#song'}
   }],
 
-  [Entity, {
-    position: '-4 -1.5 0',
-    rotation: '0 60 0',
-    levels: {analyserEl: '#analyser'}
-  }],
+  // [Entity, {
+  //   position: '-4 -1.5 0',
+  //   rotation: '0 60 0',
+  //   levels: {analyserEl: '#analyser'}
+  // }],
 
   [Entity, {
-    position: '10 -2 -5',
-    rotation: '0 -140 0',
+    position: '0 -5 0',
     waveform: {analyserEl: '#analyser'}
   }],
 
-  [Entity, {
-    position: '-5 -1 4',
-    rotation: '0 90 0',
-    'volume-graph': {analyserEl: '#analyser'}
-  }],
+  // [Entity, {
+  //   position: '-5 -1 4',
+  //   rotation: '0 90 0',
+  //   'volume-graph': {analyserEl: '#analyser'}
+  // }],
 
   // [Entity, {
   //   position: '0 0 0',
   //   'volume-light': {analyserEl: '#analyser'}
   // }],
+
+  [Entity, {
+    rotation: '0 0 180',
+    'particle-system': {
+      preset: 'snow',
+      color: '#ff007f'
+    }
+    // 'excite-particles': {analyserEl: '#analyser'}
+  },
+   ['a-animation', {
+     attribute: 'rotation',
+     dur: '60000',
+     repeat: 'indefinite',
+     to: '0 360 0',
+     easing: 'linear'
+   }]
+  ],
+
 
 
   ['a-sky', {color: '#222222'}],
