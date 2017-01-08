@@ -24,10 +24,10 @@ module.exports = rust.o2([
 
   [Entity,
    {primitive: 'a-assets'},
-   ['img', {
-     id: 'bg',
-     src: 'images/earth-2.png'
-   }],
+   // ['img', {
+   //   id: 'bg',
+   //   src: 'images/earth-2.png'
+   // }],
    ['img', {
      id: 'logo',
      src: 'images/ekko.png'
