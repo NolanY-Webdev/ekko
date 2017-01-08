@@ -25,12 +25,21 @@ module.exports = rust.o2([
   [Entity,
    {primitive: 'a-assets'},
    ['img', {
+     id: 'bg',
+     src: 'images/earth-2.png'
+   }],
+   ['img', {
      id: 'logo',
      src: 'images/ekko.png'
    }]
   ],
 
   [Player],
+
+  [Entity, {
+    id: 'analyser',
+    audioanalyser: {src: '#song'}
+  }],
 
   [
     Entity,
@@ -45,6 +54,13 @@ module.exports = rust.o2([
       to: '0 360 0',
       easing: 'linear'
     }],
+
+    [Entity, {
+      position: '2 0 0',
+      rotation: '0 0 90',
+      waveform: {analyserEl: '#analyser', radius: 0.75}
+    }],
+
 
     [Entity, logoProps = {
       geometry: {
@@ -64,21 +80,19 @@ module.exports = rust.o2([
     }, logoProps]
   ],
 
-  [Entity, {
-    id: 'analyser',
-    audioanalyser: {src: '#song'}
-  }],
-
-  // [Entity, {
-  //   position: '-4 -1.5 0',
-  //   rotation: '0 60 0',
-  //   levels: {analyserEl: '#analyser'}
-  // }],
-
-  [Entity, {
-    position: '0 -5 0',
-    waveform: {analyserEl: '#analyser'}
-  }],
+  [Entity,
+   ['a-animation', {
+     attribute: 'rotation',
+     dur: '240000',
+     repeat: 'indefinite',
+     to: '0 360 0',
+     easing: 'linear'
+   }],
+   [Entity, {
+     position: '0 -8 0',
+     levels: {analyserEl: '#analyser'}
+   }]
+  ],
 
   // [Entity, {
   //   position: '-5 -1 4',
@@ -110,8 +124,8 @@ module.exports = rust.o2([
 
 
 
-  ['a-sky', {color: '#222222'}],
-  // ['a-sky', {src: '#bg'}]
+  ['a-sky', {color: '#111111'}],
+  // ['a-sky', {src: '#bg'}],
 
   [
     Entity,
