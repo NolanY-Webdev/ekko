@@ -2,6 +2,9 @@
 
 /* global AFRAME */
 
+function varyCol(v) {
+  return Math.max(0, Math.min(255, Math.floor(Math.random() * 150 - 75 + v)));
+}
 
 AFRAME.registerComponent('levels', {
   dependencies: ['analyser'],
@@ -35,7 +38,11 @@ AFRAME.registerComponent('levels', {
 
         point.setAttribute('material', {
           opacity: 0.95,
-          color: '#0070ff'
+          color: 'rgb(' + [
+            varyCol(0),
+            varyCol(112),
+            varyCol(255)
+          ].join(',') + ')'
         });
 
         // var total = this.max;

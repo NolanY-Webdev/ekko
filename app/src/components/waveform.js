@@ -15,7 +15,7 @@ AFRAME.registerComponent('waveform', {
   init: function() {
     this.analyser = this.data.analyserEl.components.audioanalyser;
 
-    var MAX_POINTS = this.analyser.waveform.length / this.data.downScale;
+    var MAX_POINTS = Math.floor(this.analyser.waveform.length / this.data.downScale);
     this.npoints = MAX_POINTS;
 
     // geometry

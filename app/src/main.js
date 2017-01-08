@@ -41,6 +41,7 @@ module.exports = rust.o2([
     audioanalyser: {src: '#song'}
   }],
 
+
   [
     Entity,
     {
@@ -60,7 +61,6 @@ module.exports = rust.o2([
       rotation: '0 0 90',
       waveform: {analyserEl: '#analyser', radius: 0.75}
     }],
-
 
     [Entity, logoProps = {
       geometry: {
