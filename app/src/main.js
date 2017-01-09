@@ -10,6 +10,7 @@ var rust = require('rust'),
 require('components/analyser');
 require('components/levels');
 require('components/beat-scale');
+require('components/beat-light');
 require('components/waveform');
 require('components/volume-graph');
 require('components/volume-light');
@@ -83,25 +84,26 @@ module.exports = rust.o2([
     }, logoProps]
   ],
 
-  [Entity, {
-    position: '0 -5 0',
-    rotation: '-90 0 0',
-    geometry: {
-      primitive: 'circle',
-      radius: 1
-    },
-    material: {
-      color: 'white',
-      wireframe: true
-    },
-    'beat-scale': {x: 1, y: 1, analyserEl: '#analyser'}
-  }],
+  // [Entity, {
+  //   position: '0 -5 0',
+  //   rotation: '-90 0 0',
+  //   geometry: {
+  //     primitive: 'circle',
+  //     radius: 1
+  //   },
+  //   material: {
+  //     color: 'white',
+  //     wireframe: true
+  //   },
+  //   'beat-scale': {x: 1, y: 1, analyserEl: '#analyser'}
+  // }],
 
   [Entity, {
     light: {
       type: 'point',
-      intensity: 2
-    }
+      intensity: 1
+    },
+    'beat-light': {analyserEl: '#analyser'}
   }],
 
   [Entity,
@@ -132,10 +134,10 @@ module.exports = rust.o2([
   [Entity, {
     rotation: '0 0 180',
     'particle-system': {
+      size: '1.5',
       preset: 'snow',
       color: '#ff007f'
     }
-    // 'excite-particles': {analyserEl: '#analyser'}
   },
    ['a-animation', {
      attribute: 'rotation',

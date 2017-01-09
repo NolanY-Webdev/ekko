@@ -2,9 +2,9 @@
 
 /* global AFRAME */
 
-function varyCol(v) {
-  return Math.max(0, Math.min(255, Math.floor(Math.random() * 150 - 75 + v)));
-}
+// function varyCol(v) {
+//   return Math.max(0, Math.min(255, Math.floor(Math.random() * 100 - 50 + v)));
+// }
 
 AFRAME.registerComponent('levels', {
   dependencies: ['analyser'],
@@ -12,7 +12,7 @@ AFRAME.registerComponent('levels', {
   schema: {
     analyserEl: {type: 'selector'},
     size: {default: 2},
-    downScale: {default: 40}
+    downScale: {default: 50}
   },
 
   init: function() {
@@ -24,6 +24,7 @@ AFRAME.registerComponent('levels', {
       for (var j = 1; j < this.max; j += this.data.downScale) {
         var point = document.createElement('a-entity');
 
+        point.setAttribute('rotation', '0 45 0');
         point.setAttribute('position', {
           x: (i - this.max / 2) / 15,
           y: 0,
@@ -31,18 +32,23 @@ AFRAME.registerComponent('levels', {
         });
         point.setAttribute('geometry', {
           primitive: 'box',
-          width: 1,
+          width: 2.2,
           height: 0.1,
-          depth: 1
+          depth: 2.2
         });
+        point.setAttribute('scale', [
+          1,
+          0,
+          1
+        ].join(' '));
 
         point.setAttribute('material', {
-          opacity: 0.95,
-          color: 'rgb(' + [
-            varyCol(0),
-            varyCol(112),
-            varyCol(255)
-          ].join(',') + ')'
+          opacity: 0.95
+          // color: 'rgb(' + [
+          //   varyCol(0),
+          //   varyCol(112),
+          //   varyCol(255)
+          // ].join(',') + ')'
         });
 
         // var total = this.max;
@@ -79,11 +85,11 @@ AFRAME.registerComponent('levels', {
           var v = (this.analyser.levels[i] + this.analyser.levels[j]);
           child.setAttribute('scale', [
             1,
-            v / 10,
+            v / 20,
             1
           ].join(' '));
           child.setAttribute('position', {
-            y: v / 200
+            y: v / 400
           });
         }
 
