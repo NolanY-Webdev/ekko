@@ -34,6 +34,7 @@ module.exports = rust.class({
         ctx.setState({current: ctx.state.current + 1});
       }
     });
+
   },
 
   getFaves: function() {

@@ -2,6 +2,8 @@
 
 /* global AFRAME, _ */
 
+var beatDetector = require('audio/beat-detector');
+
 // Audio Nodes
 var source,
     audioCtx = window.AudioContext
@@ -55,8 +57,14 @@ AFRAME.registerComponent('audioanalyser', {
 
   init: function() {
     if (this.data.src) {
-      var src = audioCtx.createMediaElementSource(this.data.src);
+      var audioEl = this.data.src;
+      var src = audioCtx.createMediaElementSource(audioEl);
       connectSource(src);
+
+      var ctx = this;
+      beatDetector(audioEl, function() {
+        ctx.el.emit('beat');
+      });
 
       // mobile start
       document.body.addEventListener('touchstart', function() {
@@ -77,12 +85,6 @@ AFRAME.registerComponent('audioanalyser', {
     this.waveform = new Uint8Array(analyser.fftSize);
     this.volume = 0;
 
-    // beat detection vars
-    this.threshold = 0;
-    this.lastBeat = Date.now();
-    this.bpms = [];
-    this.last = Date.now();
-    this.guess = 60;
   },
 
   tick: function() {
@@ -95,52 +97,6 @@ AFRAME.registerComponent('audioanalyser', {
       sum += this.levels[i];
     }
     this.volume = sum / 3000; // rough est of %
-
-
-    // Beat detection
-    if (Date.now() - this.lastBeat > 60000 / this.guess - 10) {
-      this.el.emit('beat');
-      this.lastBeat = Date.now();
-    }
-
-    var cur = this.analyser;
-
-    if (cur > this.threshold && cur > 0.2) {
-
-      var d = Date.now();
-      var interval = d - this.last;
-      this.last = d;
-      var bpm = 60000 / interval;
-      this.bpms.push(bpm);
-      var groups = [];
-      _.map(this.bpms, function(b) {
-        groups.push(Math.floor((b + 5) / 10) * 10);
-      });
-      var bpmMode = mode(groups);
-
-      var averageModeBpm = 0;
-      var samples = 0;
-      for (var b = 0; b < groups.length; b++) {
-        if (groups[b] === bpmMode) {
-          samples++;
-          averageModeBpm += (this.bpms[b] - averageModeBpm) / samples;
-        }
-      }
-      this.guess = averageModeBpm;
-
-      if (Math.abs(bpm - averageModeBpm) < 10) {
-        if (Date.now() - this.lastBeat > 60000 / this.guess / 2) {
-          this.el.emit('beat');
-        }
-        this.lastBeat = d; // reset downbeat
-      }
-
-      this.threshold = cur * 1.5;
-    } else {
-      this.threshold = this.threshold * 0.99;
-    }
-    // End Beat Detection
-
   }
 });
 

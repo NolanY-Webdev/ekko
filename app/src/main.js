@@ -9,6 +9,7 @@ var rust = require('rust'),
 
 require('components/analyser');
 require('components/levels');
+require('components/beat-scale');
 require('components/waveform');
 require('components/volume-graph');
 require('components/volume-light');
@@ -38,7 +39,9 @@ module.exports = rust.o2([
 
   [Entity, {
     id: 'analyser',
-    audioanalyser: {src: '#song'}
+    audioanalyser: {
+      src: '#song'
+    }
   }],
 
 
@@ -79,6 +82,27 @@ module.exports = rust.o2([
       rotation: '0 180 0'
     }, logoProps]
   ],
+
+  [Entity, {
+    position: '0 -5 0',
+    rotation: '-90 0 0',
+    geometry: {
+      primitive: 'circle',
+      radius: 1
+    },
+    material: {
+      color: 'white',
+      wireframe: true
+    },
+    'beat-scale': {x: 1, y: 1, analyserEl: '#analyser'}
+  }],
+
+  [Entity, {
+    light: {
+      type: 'point',
+      intensity: 2
+    }
+  }],
 
   [Entity,
    ['a-animation', {
@@ -121,7 +145,6 @@ module.exports = rust.o2([
      easing: 'linear'
    }]
   ],
-
 
 
   ['a-sky', {color: '#111111'}],
