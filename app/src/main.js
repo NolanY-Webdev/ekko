@@ -22,7 +22,12 @@ require('components/clickable');
 
 module.exports = rust.o2([
   Scene,
-  {antialias: true},
+  {
+    antialias: true,
+    'vr-mode-ui': {
+      enabled: true
+    }
+  },
 
   [Entity,
    {primitive: 'a-assets'},
